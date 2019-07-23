@@ -1,8 +1,8 @@
 {
     "do_git_backup": true,
-    "git_push_interval_minutes": 0,
+    "git_push_interval_minutes": 10,
     "is_encrypted": true,
-    "last_git_push": 26065156,
+    "last_git_push": 26065178,
     "note_extensions": [
         "txt",
         "md"
