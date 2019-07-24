@@ -1,3 +1,6 @@
+# troubleshooting steps
+- are you using the proper SNMP version?
+
 # Requesting OIDs
 
 if you want to request a specific OID from a mib
