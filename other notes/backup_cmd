@@ -9,6 +9,7 @@ addr=216 \
 && scp restapi/ops/__init__.py root@10.10.1.$addr:$UI_ADMIN/restapi/ops/ \
 && scp restapi/__init__.py root@10.10.1.$addr:$UI_ADMIN/restapi/ \
 && scp __init__.py root@10.10.1.$addr:$UI_ADMIN/ \
+&& scp utils.py root@10.10.1.$addr:$UI_ADMIN/ \
 && scp config.py root@10.10.1.$addr:$UI_ADMIN/ \
 && scp restapi/ops/__init__.py root@10.10.1.$addr:$UI_ADMIN/restapi/ops/ \
 && scp ../../../modules/python/profile_management/profile_management.py root@10.10.1.$addr:$SITE_PKGS/ \
