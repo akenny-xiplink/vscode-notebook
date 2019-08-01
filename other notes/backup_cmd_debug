@@ -9,9 +9,14 @@ ADDR=10.12.0.172 \
 && scp $TAWNY_LOCAL/operations.py root@$ADDR:$TAWNY_REMOTE/ \
 && scp $TAWNY_LOCAL/Daemon.py root@$ADDR:$TAWNY_REMOTE/ \
 && ssh root@$ADDR "rm $SITE_PKGS/profile_management.pyc ; rm $TAWNY_REMOTE/operations.pyc; rm $TAWNY_REMOTE/Daemon.pyc" \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp utils.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp restapi/ops/__init__.py root@$ADDR:$UI_ADMIN/restapi/ops/ \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp restapi/__init__.py root@$ADDR:$UI_ADMIN/restapi/ \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp __init__.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp config.py root@$ADDR:$UI_ADMIN/ \
 && ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi'
