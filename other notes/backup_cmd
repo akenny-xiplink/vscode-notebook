@@ -1,17 +1,20 @@
 ADDR=10.12.0.172 \
-&& TAWNY_LOCAL=../../tawny/tawny \
+&& UI_GIT=/home/akenny/xiplink_gits/UI \
+&& UI_ADMIN=/management/ui/Admin \
+&& UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
+&& TAWNY_LOCAL=$UI_GIT/management/tawny/tawny \
 && SITE_PKGS=/usr/local/lib/python2.7/site-packages \
 && TAWNY_REMOTE=$SITE_PKGS/tawny \
-&& UI_ADMIN=/management/ui/Admin \
-&& scp System/Backup.* root@$ADDR:$UI_ADMIN/System/ \
-&& scp static/xiplink.js root@$ADDR:$UI_ADMIN/static/ \
-&& scp ../../../modules/python/profile_management/profile_management.py root@$ADDR:$SITE_PKGS/ \
+&& scp $UI_GIT_ADMIN/System/Backup.* root@$ADDR:$UI_ADMIN/System/ \
+&& scp $UI_GIT_ADMIN/static/xiplink.js root@$ADDR:$UI_ADMIN/static/ \
+&& scp $UI_GIT/modules/python/profile_management/profile_management.py root@$ADDR:$SITE_PKGS/ \
 && scp $TAWNY_LOCAL/operations.py root@$ADDR:$TAWNY_REMOTE/ \
 && scp $TAWNY_LOCAL/Daemon.py root@$ADDR:$TAWNY_REMOTE/ \
 && ssh root@$ADDR "rm $SITE_PKGS/profile_management.pyc ; rm $TAWNY_REMOTE/operations.pyc; rm $TAWNY_REMOTE/Daemon.pyc" \
-&& scp utils.py root@$ADDR:$UI_ADMIN/ \
-&& scp restapi/ops/__init__.py root@$ADDR:$UI_ADMIN/restapi/ops/ \
-&& scp restapi/__init__.py root@$ADDR:$UI_ADMIN/restapi/ \
-&& scp __init__.py root@$ADDR:$UI_ADMIN/ \
-&& scp config.py root@$ADDR:$UI_ADMIN/ \
+&& scp $UI_GIT/build/products/FreeBSD/default/skeleton/usr/local/bin/profileManager root@$ADDR:/usr/local/bin/ \
+&& scp $UI_GIT_ADMIN/utils.py root@$ADDR:$UI_ADMIN/ \
+&& scp $UI_GIT_ADMIN/restapi/ops/__init__.py root@$ADDR:$UI_ADMIN/restapi/ops/ \
+&& scp $UI_GIT_ADMIN/restapi/__init__.py root@$ADDR:$UI_ADMIN/restapi/ \
+&& scp $UI_GIT_ADMIN/__init__.py root@$ADDR:$UI_ADMIN/ \
+&& scp $UI_GIT_ADMIN/config.py root@$ADDR:$UI_ADMIN/ \
 && ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi'
