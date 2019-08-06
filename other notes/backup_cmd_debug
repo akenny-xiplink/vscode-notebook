@@ -11,7 +11,7 @@ ADDR=10.12.0.172 \
 && scp $TAWNY_LOCAL/operations.py root@$ADDR:$TAWNY_REMOTE/ \
 && scp $TAWNY_LOCAL/Daemon.py root@$ADDR:$TAWNY_REMOTE/ \
 && ssh root@$ADDR "rm $SITE_PKGS/profile_management.pyc ; rm $TAWNY_REMOTE/operations.pyc; rm $TAWNY_REMOTE/Daemon.pyc" \
-&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
+; ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \
 && scp $UI_GIT/build/products/FreeBSD/default/skeleton/usr/local/bin/profileManager root@$ADDR:/usr/local/bin/ \
 && scp $UI_GIT_ADMIN/utils.py root@$ADDR:$UI_ADMIN/ \
 && ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi' && sleep 3 \

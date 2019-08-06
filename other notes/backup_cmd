@@ -1,4 +1,5 @@
 ADDR=10.12.0.172 \
+&& ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
 && UI_GIT=/home/akenny/xiplink_gits/UI \
 && UI_ADMIN=/management/ui/Admin \
 && UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
@@ -11,7 +12,7 @@ ADDR=10.12.0.172 \
 && scp $TAWNY_LOCAL/operations.py root@$ADDR:$TAWNY_REMOTE/ \
 && scp $TAWNY_LOCAL/Daemon.py root@$ADDR:$TAWNY_REMOTE/ \
 && ssh root@$ADDR "rm $SITE_PKGS/profile_management.pyc ; rm $TAWNY_REMOTE/operations.pyc; rm $TAWNY_REMOTE/Daemon.pyc" \
-&& scp $UI_GIT/build/products/FreeBSD/default/skeleton/usr/local/bin/profileManager root@$ADDR:/usr/local/bin/ \
+; scp $UI_GIT/build/products/FreeBSD/default/skeleton/usr/local/bin/profileManager root@$ADDR:/usr/local/bin/ \
 && scp $UI_GIT_ADMIN/utils.py root@$ADDR:$UI_ADMIN/ \
 && scp $UI_GIT_ADMIN/restapi/ops/__init__.py root@$ADDR:$UI_ADMIN/restapi/ops/ \
 && scp $UI_GIT_ADMIN/restapi/__init__.py root@$ADDR:$UI_ADMIN/restapi/ \
