@@ -1,0 +1,7 @@
+ADDR=10.12.0.172 \
+&& ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
+&& UI_GIT=/home/akenny/xiplink_gits/UI \
+&& UI_ADMIN=/management/ui/Admin \
+&& UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
+&& scp $UI_GIT_ADMIN/Links/* root@$ADDR:$UI_ADMIN/Links/ \
+&& ssh root@$ADDR 'pkill -alf fcgi'
