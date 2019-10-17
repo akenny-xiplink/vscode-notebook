@@ -1,0 +1,15 @@
+ADDR=10.12.0.16 \
+&& ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
+&& UI_GIT=/home/akenny/xiplink_gits/Tawny \
+&& UI_ADMIN=/management/ui/Admin \
+&& UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
+&& TAWNY_LOCAL=$UI_GIT/management/tawny/tawny \
+&& SITE_PKGS=/usr/local/lib/python2.7/site-packages \
+&& TAWNY_REMOTE=$SITE_PKGS/tawny \
+&& scp $UI_GIT_ADMIN/static/xiplink.js root@$ADDR:$UI_ADMIN/static/ \
+&& scp $UI_GIT_ADMIN/templates/applyChangesTemplate.html root@$ADDR:$UI_ADMIN/templates/ \
+&& scp $TAWNY_LOCAL/operations.py root@$ADDR:$TAWNY_REMOTE/ \
+&& scp $TAWNY_LOCAL/Daemon.py root@$ADDR:$TAWNY_REMOTE/ \
+&& ssh root@$ADDR "rm $TAWNY_REMOTE/operations.pyc; rm $TAWNY_REMOTE/Daemon.pyc" \
+; scp $UI_GIT/build/products/FreeBSD/default/skeleton/usr/local/bin/profileManager root@$ADDR:/usr/local/bin/ \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi'

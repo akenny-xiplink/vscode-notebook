@@ -1,0 +1,4 @@
+- is it the right type (PUT, POST, GET)
+- is it the right url?
+- is the url known to restapi/__init__.py
+- do names of the classes in restapi/__init__.py and restapi/ops/__init__.py match

@@ -1,0 +1,30 @@
+ADDR=10.12.0.16 \
+&& PAUSE=5 \
+&& ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
+&& UI_GIT=/home/akenny/xiplink_gits/UI \
+&& UI_ADMIN=/management/ui/Admin \
+&& UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
+&& TAWNY_LOCAL=$UI_GIT/management/tawny/tawny \
+&& SITE_PKGS=/usr/local/lib/python2.7/site-packages \
+&& TAWNY_REMOTE=$SITE_PKGS/tawny \
+&& scp $UI_GIT_ADMIN/static/xiplink.js root@$ADDR:$UI_ADMIN/static/ \
+&& scp $UI_GIT_ADMIN/templates/*.html root@$ADDR:$UI_ADMIN/templates/ \
+&& scp $UI_GIT_ADMIN/System/*.html root@$ADDR:$UI_ADMIN/System/ \
+&& scp $UI_GIT_ADMIN/config.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR 'pkill -alf fcgi' \
+;  echo 1 && sleep $PAUSE \
+&& scp $UI_GIT_ADMIN/XipSession.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR 'pkill -alf fcgi' \
+;  echo 2 && sleep $PAUSE \
+&& scp $UI_GIT_ADMIN/XipAlert.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR 'pkill -alf fcgi' \
+;  echo 3 && sleep $PAUSE \
+&& scp $UI_GIT_ADMIN/restapi/ops/*.py root@$ADDR:$UI_ADMIN/restapi/ops/ \
+&& ssh root@$ADDR 'pkill -alf fcgi' \
+;  echo 4 && sleep $PAUSE \
+&& scp $UI_GIT_ADMIN/__init__.py root@$ADDR:$UI_ADMIN/ \
+&& ssh root@$ADDR 'pkill -alf fcgi' \
+;  echo 5 && sleep $PAUSE \
+&& scp $TAWNY_LOCAL/*.py root@$ADDR:$TAWNY_REMOTE/ \
+&& ssh root@$ADDR "rm $UI_ADMIN/Admin/*.pyc; $UI_ADMIN/Admin/restapi/ops/*.pyc; rm $TAWNY_REMOTE/*.pyc" \
+&& ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi'

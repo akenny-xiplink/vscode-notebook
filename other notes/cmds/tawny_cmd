@@ -1,0 +1,11 @@
+ADDR=10.12.0.172 \
+&& ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
+&& UI_GIT=/home/akenny/xiplink_gits/Tawny \
+&& UI_ADMIN=/management/ui/Admin \
+&& UI_GIT_ADMIN=$UI_GIT$UI_ADMIN \
+&& TAWNY_LOCAL=$UI_GIT/management/tawny/tawny \
+&& SITE_PKGS=/usr/local/lib/python2.7/site-packages \
+&& TAWNY_REMOTE=$SITE_PKGS/tawny \
+&& scp $TAWNY_LOCAL/*.py root@$ADDR:$TAWNY_REMOTE/ \
+&& ssh root@$ADDR "rm $TAWNY_REMOTE/*.pyc" \
+; ssh root@$ADDR '/etc/rc.d/tawnyd restart && pkill -alf fcgi'
