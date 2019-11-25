@@ -1,4 +1,4 @@
-ADDR=10.12.0.172 \
+ADDR=10.12.0.16 \
 && ssh-copy-id -i /home/akenny/.ssh/id_rsa.pub root@$ADDR \
 && UI_GIT=/home/akenny/xiplink_gits/Tawny \
 && UI_ADMIN=/management/ui/Admin \

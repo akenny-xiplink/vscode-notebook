@@ -1,1 +1,3 @@
 [akenny@buildVM /usr/include]$ find . -name "*.h" | xargs grep <thing_to_find>
+
+egrep -r 'typedef.*caddr_t;' /usr/include/
