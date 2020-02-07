@@ -19,7 +19,7 @@ execute in the jail as the root user with sh
 
 # build a specific dir
 ```
-sudo jexec -U root build /bin/sh -c "cd /usr/home/akenny/UI/path/to/dir; scons -U ."
+sudo jexec -U root build /bin/sh -c "cd /usr/home/akenny/UI/...; scons -U RELEASE=1 ."
 ```
 note that this dir is in the main section, not compile or image
 also note that you need to pay attention to where the output is going (i.e, `release` or `debug` in `compile`)
